@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -12,7 +14,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp();
+    return MaterialApp(
+      routes: {
+        '/': (context) => const Page(),
+      },
+    );
   }
 }
 
@@ -29,8 +35,8 @@ class MyObject {
   int value;
   MyObject(this.value);
 
-  int get _value => this.value;
-  set _value(newValue) => this.value = newValue;
+  int get _value => value;
+  set(newValue) => value = newValue;
 
   void increase() {
     value++;
@@ -41,7 +47,7 @@ class MyObject {
   }
 
   double square() {
-    return sqrt(this.value);
+    return sqrt(value);
   }
 
   int power(int exponent) {
@@ -52,21 +58,19 @@ class MyObject {
 class CounterPageState extends State<Page> {
   // MyObject myObject(0);
   int n = 0;
-  MyObject myObject = new MyObject(0);
+  MyObject myObject = MyObject(0);
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightBlueAccent,
-        title: const Text('Hướng đối tượng'),
+        title: const Text('Home Page'),
       ),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Giá trị hiện tại:  ${myObject.value}'),
+          Text('Current value:  ${myObject._value}'),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -76,7 +80,7 @@ class CounterPageState extends State<Page> {
                     setState(() {});
                   },
                   icon: const Icon(Icons.remove),
-                  label: const Text('Giảm')),
+                  label: const Text('Down')),
               const SizedBox(width: 5),
               OutlinedButton.icon(
                 onPressed: () {
@@ -84,11 +88,11 @@ class CounterPageState extends State<Page> {
                   setState(() {});
                 },
                 icon: const Icon(Icons.add),
-                label: const Text('Tăng'),
+                label: const Text('Up'),
               ),
               TextField(
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(hintText: 'Nhập số nguyên n'),
+                decoration: const InputDecoration(hintText: 'input N: '),
                 onChanged: (value) {
                   n = int.parse(value);
                 },
@@ -99,7 +103,7 @@ class CounterPageState extends State<Page> {
                   setState(() {});
                 },
                 icon: const Icon(Icons.edit_square),
-                label: const Text('Nhân luỹ thừa'),
+                label: const Text('Multiply exponentially'),
               )
             ],
           )
