@@ -11,10 +11,10 @@ void main() {
   group('UserInfo', () {
     test('Test UserInfo', () {
       userInfo = UserInfo(
-        name: "Pham Van A",
-        email: "phamA@gmail.com",
+        name: "Phạm Tiến Dũng",
+        email: "phamdung@gmail.com",
         phoneNumber: "123456789",
-        birthDate: DateTime(1999, 5, 20),
+        birthDate: DateTime(2003, 5, 20),
         address: AddressInfo(
           province: Province(
             id: "01",
@@ -23,39 +23,39 @@ void main() {
           ),
           district: District(
             id: "001",
-            name: "Quận Ba Đình",
-            level: "Quận",
-            provinceId: "01",
+          name: "Quận Hoàn Kiếm",
+          level: "Quận",
+          provinceId: "01",
           ),
           ward: Ward(
-            id: "00001",
-            name: "Phường Phúc Xá",
+            id: "0001",
+            name: "Phường Phúc Tân",
             level: "Phường",
             districtId: "001",
             provinceId: "01",
           ),
-          street: "123 Đường ABC",
+          street: "Phạm Văn Đồng",
         ),
       );
 
-      expect(userInfo?.name, "Pham Van A");
-      expect(userInfo?.email, "phamA@gmail.com");
+      expect(userInfo?.name, "Phạm Tiến Dũng");
+      expect(userInfo?.email, "phamdung@gmail.com");
       expect(userInfo?.phoneNumber, "123456789");
-      expect(userInfo?.birthDate, DateTime(1999, 5, 20));
+      expect(userInfo?.birthDate, DateTime(2003, 5, 20));
 
       expect(userInfo?.address?.province?.id, "01");
       expect(userInfo?.address?.province?.name, "Thành phố Hà Nội");
       expect(userInfo?.address?.province?.level, "Thành phố Trung ương");
 
       expect(userInfo?.address?.district?.id, "001");
-      expect(userInfo?.address?.district?.name, "Quận Ba Đình");
+      expect(userInfo?.address?.district?.name, "Quận Hoàn Kiếm");
       expect(userInfo?.address?.district?.level, "Quận");
 
-      expect(userInfo?.address?.ward?.id, "00001");
-      expect(userInfo?.address?.ward?.name, "Phường Phúc Xá");
+      expect(userInfo?.address?.ward?.id, "0001");
+      expect(userInfo?.address?.ward?.name, "Phường Phúc Tân");
       expect(userInfo?.address?.ward?.level, "Phường");
 
-      expect(userInfo?.address?.street, "123 Đường ABC");
+      expect(userInfo?.address?.street, "Phạm Văn Đồng");
     });
   });
 }

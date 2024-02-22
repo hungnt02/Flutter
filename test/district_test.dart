@@ -5,25 +5,25 @@ void main() {
   District? district;
   group('District', () {
     test('test District', () {
-      var district = District(id: "01", name: "Thành phố Hà Nội", level: "Thành phố Trung ương", provinceId: "01");
-      expect(district.id, "01");
-      expect(district.name, "Thành phố Hà Nội");
-      expect(district.level, "Thành phố Trung ương");
+      var district = District(id: "001", name: "Quận Hoàn Kiếm", level: "Quận", provinceId: "01");
+      expect(district.id, "001");
+      expect(district.name, "Quận Hoàn Kiếm");
+      expect(district.level, "Quận");
     });
   });
   group('Test District:', () {
     setUp(() {
       district = District(
         id: "01",
-        name: "Thành phố Hà Nội",
-        level: "Thành phố Trung ương",
+        name: "Quận Hoàn Kiếm",
+        level: "Quận",
       );
     });
 
     test('test Province?', () {
       expect(district?.id, equals("01"));
-      expect(district?.name, equals("Thành phố Hà Nội"));
-      expect(district?.level, equals("Thành phố Trung ương"));
+      expect(district?.name, equals("Quận Hoàn Kiếm"));
+      expect(district?.level, equals("Quận"));
     });
   });
 }

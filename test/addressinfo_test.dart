@@ -19,18 +19,18 @@ void main() {
         ),
         district: District(
           id: "001",
-          name: "Quận Ba Đình",
+          name: "Quận Hoàn Kiếm",
           level: "Quận",
           provinceId: "01",
         ),
         ward: Ward(
-          id: "00001",
-          name: "Phường Phúc Xá",
+          id: "0001",
+          name: "Phường Phúc Tân",
           level: "Phường",
           districtId: "001",
           provinceId: "01",
         ),
-        street: "123 Đường ABC",
+        street: "Phạm Văn Đồng",
       );
 
       expect(addressInfo?.province?.id, "01");
@@ -38,14 +38,14 @@ void main() {
       expect(addressInfo?.province?.level, "Thành phố Trung ương");
 
       expect(addressInfo?.district?.id, "001");
-      expect(addressInfo?.district?.name, "Quận Ba Đình");
+      expect(addressInfo?.district?.name, "Quận Hoàn Kiếm");
       expect(addressInfo?.district?.level, "Quận");
 
-      expect(addressInfo?.ward?.id, "00001");
-      expect(addressInfo?.ward?.name, "Phường Phúc Xá");
+      expect(addressInfo?.ward?.id, "0001");
+      expect(addressInfo?.ward?.name, "Phường Phúc Tân");
       expect(addressInfo?.ward?.level, "Phường");
 
-      expect(addressInfo?.street, "123 Đường ABC");
+      expect(addressInfo?.street, "Phạm Văn Đồng");
     });
   });
 }
