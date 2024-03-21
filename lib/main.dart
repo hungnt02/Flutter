@@ -1,5 +1,7 @@
-import 'package:api_pluter/home_screen.dart';
+import 'package:api_pluter/home.dart';
+import 'package:api_pluter/search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,8 +12,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomeScreen(),
-    );
+    return MaterialApp(
+        title: 'Explore',
+        home: Scaffold(
+          appBar: AppBar(title: const Text('SliverFillRemaining Sample')),
+          body: const SearchBarApp(),
+        ));
   }
 }
