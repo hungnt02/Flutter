@@ -23,46 +23,30 @@ class Detail extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
           ),
         ),
-        body: const Column(
+        body: Column(
           children: [
             Card(
               child: Image(
-                image: NetworkImage(
-                    'https://c.biztoc.com/p/0d1167555ca0b473/s.webp'),
+                image: NetworkImage(article.urlToImage ?? ""),
                 width: 400,
                 height: 150,
                 alignment: Alignment.topCenter,
               ),
             ),
             Center(
-              child: Text(
-                  "Elizabeth Warren unloads on Elon Musk, urging SEC chief Gary Gensler to probe pathway for ‘Tesla to channel money to X’",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-            ),
+                child: Container(
+              padding: EdgeInsets.all(10.0),
+              child: Text(article.title ?? '',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            )),
             Center(
-              child: Text(
-                  "Sen. Elizabeth Warren is again calling on the Securities and Exchange Commission to investigate whether Elon Musk’s dealings with Tesla board members have crossed the line from a CEO who answers to independent board members with the power to hire and fire the…",
+                child: Container(
+              padding: EdgeInsets.all(10.0),
+              child: Text(article.description ?? '',
                   style:
-                      TextStyle(fontWeight: FontWeight.normal, fontSize: 18)),
-            )
+                      TextStyle(fontWeight: FontWeight.normal, fontSize: 15)),
+            ))
           ],
         ));
   }
-
-  // Future<Article> getArticles() async {
-  //   const url =
-  //       "https://newsapi.org/v2/top-headlines?country=us&apiKey=3c1a3d55326a4307a86978b745894d5d";
-  //   final response = await http.get(Uri.parse(url));
-  //   if (response.statusCode == 200) {
-  //     final Article articles;
-  //     final body = jsonDecode(response.body) as Map<String, dynamic>;
-  //     // final articlesData = body['articles'] as List<dynamic>;
-  //     // articlesData.forEach((articleData) {
-  //     //   articles.add(Article.fromMap(articleData));
-  //     // });
-  //     // return articles;
-  //   } else {
-  //     throw Exception('Failed to load articles');
-  //   }
-  // }
 }
