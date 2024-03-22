@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:my_app/addressInfor.dart';
-import 'package:my_app/province.dart';
+import 'package:my_app/models/addressInfor.dart';
+import 'package:my_app/models/province.dart';
+import 'package:my_app/models/ward.dart';
 
 void main() {
   group('Test addressInfor', () {

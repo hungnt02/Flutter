@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:my_app/province.dart';
+import 'package:my_app/models/province.dart';
 
 void main() {
   group('Test province', () {
