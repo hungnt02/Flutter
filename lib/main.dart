@@ -13,10 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Explore',
         home: Scaffold(
-          appBar: AppBar(title: const Text('SliverFillRemaining Sample')),
-          body: const SearchBarApp(),
-        ));
+      appBar: AppBar(
+          title: const Text('Eplore',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23))),
+      body: const SliverFillRemainingExampleApp(),
+    ));
   }
 }

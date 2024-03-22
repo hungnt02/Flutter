@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:api_pluter/detail.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:api_pluter/article.dart';
@@ -9,91 +10,59 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-            title: const Text("Explore",
-                style: TextStyle(fontWeight: FontWeight.bold))),
-        body: Center(
-          child: FutureBuilder<List<Article>>(
-            future: getArticles(),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                case ConnectionState.active:
-                case ConnectionState.waiting:
-                  return const Center(child: CircularProgressIndicator());
-                case ConnectionState.done:
-                  if (snapshot.hasData) {
-                    final List<Article> articles = snapshot.data!;
-                    return ListView.builder(
-                      itemCount: articles.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: Image.network(
-                            articles[index].urlToImage ?? "",
-                            width: 80,
-                            height: 80,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
-                                color: Colors.red,
-                                width: 80,
-                                height: 80,
-                              );
-                            },
-                          ),
-                          title: Text(articles[index].title ?? ""),
+    return Center(
+      child: FutureBuilder<List<Article>>(
+        future: getArticles(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.active:
+            case ConnectionState.waiting:
+              return const Center(child: CircularProgressIndicator());
+            case ConnectionState.done:
+              if (snapshot.hasData) {
+                final List<Article> articles = snapshot.data!;
+                return ListView.builder(
+                  itemCount: articles.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Detail(article: articles[index])),
                         );
                       },
+                      child: ListTile(
+                        leading: Image.network(
+                          articles[index].urlToImage ?? "",
+                          width: 100,
+                          height: 200,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.red,
+                              width: 100,
+                              height: 200,
+                            );
+                          },
+                        ),
+                        title: Text(articles[index].title ?? "",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 13)),
+                      ),
                     );
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text("Error: ${snapshot.error}"));
-                  } else {
-                    return const Center(child: Text("No data"));
-                  }
+                  },
+                );
+              } else if (snapshot.hasError) {
+                return Center(child: Text("Error: ${snapshot.error}"));
+              } else {
+                return const Center(child: Text("No data"));
               }
-            },
-          ),
-        )
-        // body: FutureBuilder<List<Article>>(
-        //   future: getArticles(),
-        //   builder: (context, snapshot) {
-        //     switch (snapshot.connectionState) {
-        //       case ConnectionState.none:
-        //       case ConnectionState.active:
-        //       case ConnectionState.waiting:
-        //         return const Center(child: CircularProgressIndicator());
-        //       case ConnectionState.done:
-        //         if (snapshot.hasData) {
-        //           final List<Article> articles = snapshot.data!;
-        //           return ListView.builder(
-        //             itemCount: articles.length,
-        //             itemBuilder: (context, index) {
-        //               return ListTile(
-        //                 leading: Image.network(
-        //                   articles[index].urlToImage ?? "",
-        //                   width: 80,
-        //                   height: 80,
-        //                   errorBuilder: (context, error, stackTrace) {
-        //                     return Container(
-        //                       color: Colors.red,
-        //                       width: 80,
-        //                       height: 80,
-        //                     );
-        //                   },
-        //                 ),
-        //                 title: Text(articles[index].title ?? ""),
-        //               );
-        //             },
-        //           );
-        //         } else if (snapshot.hasError) {
-        //           return Center(child: Text("Error: ${snapshot.error}"));
-        //         } else {
-        //           return const Center(child: Text("No data"));
-        //         }
-        //     }
-        //   },
-        // ),
-        );
+          }
+        },
+      ),
+    );
   }
 
   Future<List<Article>> getArticles() async {
