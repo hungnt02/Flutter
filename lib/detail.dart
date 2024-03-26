@@ -27,7 +27,8 @@ class Detail extends StatelessWidget {
           children: [
             Card(
               child: Image(
-                image: NetworkImage(article.urlToImage ?? ""),
+                fit: BoxFit.contain,
+                image: NetworkImage(article.urlToImage ?? ''),
                 width: 400,
                 height: 150,
                 alignment: Alignment.topCenter,

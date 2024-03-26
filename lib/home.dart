@@ -1,5 +1,6 @@
 import 'package:api_pluter/home_screen.dart';
 import 'package:api_pluter/search.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SliverFillRemainingExampleApp extends StatelessWidget {
@@ -7,13 +8,26 @@ class SliverFillRemainingExampleApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
+    return CustomScrollView(
       physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       slivers: <Widget>[
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(
           child: SearchBarApp(),
         ),
-        SliverFillRemaining(
+        Row(
+          children: [
+            ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Container(
+                  child: Text('All'),
+                  width: 100,
+                )
+              ],
+            )
+          ],
+        ),
+        const SliverFillRemaining(
           child: HomeScreen(),
         )
       ],
