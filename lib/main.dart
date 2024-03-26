@@ -165,23 +165,64 @@ class HomePage extends State<Home> {
                             );
                           },
                           child: ListTile(
-                            leading: Image.network(
-                              fit: BoxFit.contain,
-                              articles[index].urlToImage ?? "",
-                              width: 100,
-                              height: 200,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  // child: Image.asset('assets/images/img1.jpg'),
-                                  width: 0,
-                                  height: 0,
-                                );
-                              },
-                            ),
-                            title: Text(articles[index].title ?? '',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 13)),
-                          ),
+                              leading: Image.network(
+                                fit: BoxFit.cover,
+                                articles[index].urlToImage ?? "",
+                                width: 100,
+                                height: 150,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                    // child: Image.asset('assets/images/img1.jpg'),
+                                    width: 0,
+                                    height: 0,
+                                  );
+                                },
+                              ),
+                              title: Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(articles[index].title ?? '',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 11),
+                                        textAlign: TextAlign.left),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.only(top: 3),
+                                        child: Text(
+                                            articles[index].author ?? 'Ẩn danh',
+                                            style: const TextStyle(
+                                                fontFamily:
+                                                    AutofillHints.addressCity,
+                                                fontWeight: FontWeight.w200,
+                                                fontSize: 10),
+                                            textAlign: TextAlign.left),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(top: 3),
+                                        child: Text(
+                                          articles[index]
+                                                  .publishedAt
+                                                  ?.substring(0, 10) ??
+                                              '',
+                                          style: const TextStyle(
+                                            fontFamily:
+                                                AutofillHints.addressCity,
+                                            fontWeight: FontWeight.w200,
+                                            fontSize: 10,
+                                          ),
+                                          textAlign: TextAlign.right,
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              )),
                         );
                       },
                     );

@@ -34,16 +34,43 @@ class Detail extends StatelessWidget {
                 alignment: Alignment.topCenter,
               ),
             ),
+            Container(
+              alignment: Alignment.topLeft,
+              padding: EdgeInsets.only(top: 3, left: 10),
+              child: Text(article.author ?? 'Ẩn danh',
+                  style: const TextStyle(
+                      fontFamily: AutofillHints.addressCity,
+                      fontWeight: FontWeight.w200,
+                      fontSize: 13),
+                  textAlign: TextAlign.right),
+            ),
             Center(
                 child: Container(
               padding: EdgeInsets.all(10.0),
               child: Text(article.title ?? '',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
             )),
+            Container(
+              alignment: Alignment.topRight,
+              padding: EdgeInsets.only(top: 3, right: 10),
+              child: Text(article.publishedAt?.substring(0, 10) ?? 'Ẩn danh',
+                  style: const TextStyle(
+                      fontFamily: AutofillHints.addressCity,
+                      fontWeight: FontWeight.w200,
+                      fontSize: 13),
+                  textAlign: TextAlign.right),
+            ),
             Center(
                 child: Container(
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.only(top: 10, left: 10, right: 10),
               child: Text(article.description ?? '',
+                  style:
+                      TextStyle(fontWeight: FontWeight.normal, fontSize: 15)),
+            )),
+            Center(
+                child: Container(
+              padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+              child: Text(article.content ?? '',
                   style:
                       TextStyle(fontWeight: FontWeight.normal, fontSize: 15)),
             ))
