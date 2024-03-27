@@ -1,14 +1,15 @@
+import 'dart:convert';
 import 'dart:math';
 
-import 'package:api_pluter/article.dart';
-import 'package:api_pluter/detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
-void main() {
+import 'package:api_pluter/article.dart';
+import 'package:api_pluter/detail.dart';
+
+main() {
   runApp(MyApp());
 }
 
@@ -34,6 +35,7 @@ class Home extends StatefulWidget {
 
 class HomePage extends State<Home> {
   int? _value = 0;
+  int? page = 0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -92,7 +94,7 @@ class HomePage extends State<Home> {
         SingleChildScrollView(
           padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
           scrollDirection: Axis.horizontal,
-          child: Wrap(spacing: 5.0, direction: Axis.horizontal, children: [
+          child: Wrap(spacing: 4.0, direction: Axis.horizontal, children: [
             ChoiceChip(
               label: Text('All'),
               selected: _value == 0,
@@ -165,19 +167,26 @@ class HomePage extends State<Home> {
                             );
                           },
                           child: ListTile(
-                              leading: Image.network(
-                                fit: BoxFit.cover,
-                                articles[index].urlToImage ?? "",
-                                width: 100,
-                                height: 150,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Container(
-                                    // child: Image.asset('assets/images/img1.jpg'),
-                                    width: 0,
-                                    height: 0,
-                                  );
-                                },
-                              ),
+                              leading: Container(
+                                  width: 100,
+                                  height: 150,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(7),
+                                    child: SizedBox.fromSize(
+                                      size: Size.fromRadius(0),
+                                      child: Image.network(
+                                        articles[index].urlToImage ?? "",
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                          return Container(
+                                            width: 0,
+                                            height: 0,
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  )),
                               title: Column(
                                 children: [
                                   Container(
@@ -233,6 +242,80 @@ class HomePage extends State<Home> {
                   }
               }
             },
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.only(right: 10, left: 10, top: 10),
+          height: 55,
+          child: Wrap(
+            spacing: 25,
+            children: [
+              ChoiceChip(
+                showCheckmark: false,
+                shape: const StadiumBorder(
+                  side: BorderSide(style: BorderStyle.none),
+                ),
+                selectedColor: Colors.black12,
+                label: Container(
+                  child: Icon(IconData(0xe318, fontFamily: 'MaterialIcons')),
+                ),
+                selected: page == 0,
+                onSelected: (bool selected) {
+                  setState(() {
+                    page = selected ? 0 : 0;
+                  });
+                },
+              ),
+              ChoiceChip(
+                showCheckmark: false,
+                selectedColor: Colors.black12,
+                labelPadding: EdgeInsets.zero,
+                shape: const StadiumBorder(
+                  side: BorderSide(style: BorderStyle.none),
+                ),
+                label: Container(
+                  child: Icon(IconData(0xf061b, fontFamily: 'MaterialIcons')),
+                ),
+                selected: page == 1,
+                onSelected: (bool selected) {
+                  setState(() {
+                    page = selected ? 1 : 0;
+                  });
+                },
+              ),
+              ChoiceChip(
+                showCheckmark: false,
+                selectedColor: Colors.black12,
+                shape: const StadiumBorder(
+                  side: BorderSide(style: BorderStyle.none),
+                ),
+                label: Container(
+                  child: Icon(IconData(0xf060f, fontFamily: 'MaterialIcons')),
+                ),
+                selected: page == 2,
+                onSelected: (bool selected) {
+                  setState(() {
+                    page = selected ? 2 : 0;
+                  });
+                },
+              ),
+              ChoiceChip(
+                showCheckmark: false,
+                selectedColor: Colors.black12,
+                shape: const StadiumBorder(
+                  side: BorderSide(style: BorderStyle.none),
+                ),
+                label: Container(
+                  child: Icon(IconData(0xee35, fontFamily: 'MaterialIcons')),
+                ),
+                selected: page == 3,
+                onSelected: (bool selected) {
+                  setState(() {
+                    page = selected ? 3 : 0;
+                  });
+                },
+              )
+            ],
           ),
         )
       ],

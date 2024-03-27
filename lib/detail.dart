@@ -6,16 +6,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
-class Detail extends StatelessWidget {
+class Detail extends StatefulWidget {
   final Article article;
 
-  const Detail({
-    Key? key,
-    required this.article,
-  }) : super(key: key);
+  const Detail({super.key, required this.article});
+
+  @override
+  State<Detail> createState() => Details(article: article);
+}
+
+class Details extends State<Detail> {
+  final Article article;
+
+  Details({required this.article});
 
   @override
   Widget build(BuildContext context) {
+    int? page = 0;
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -25,15 +32,26 @@ class Detail extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Card(
-              child: Image(
-                fit: BoxFit.contain,
-                image: NetworkImage(article.urlToImage ?? ''),
+            Container(
                 width: 400,
-                height: 150,
-                alignment: Alignment.topCenter,
-              ),
-            ),
+                height: 200,
+                padding: EdgeInsets.all(8),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20), // Image border
+                  child: SizedBox.fromSize(
+                    size: Size.fromRadius(48), // Image radius
+                    child: Image.network(
+                      article.urlToImage ?? '',
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          width: 400,
+                          height: 200,
+                        );
+                      },
+                    ),
+                  ),
+                )),
             Container(
               alignment: Alignment.topLeft,
               padding: EdgeInsets.only(top: 3, left: 10),
@@ -68,12 +86,12 @@ class Detail extends StatelessWidget {
                       TextStyle(fontWeight: FontWeight.normal, fontSize: 15)),
             )),
             Center(
-                child: Container(
+                child: SingleChildScrollView(
               padding: EdgeInsets.only(top: 10, left: 10, right: 10),
               child: Text(article.content ?? '',
                   style:
                       TextStyle(fontWeight: FontWeight.normal, fontSize: 15)),
-            ))
+            )),
           ],
         ));
   }
